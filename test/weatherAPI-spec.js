@@ -1,6 +1,6 @@
 var chai = require('chai'),
 	request = require('request'),
-	Weather = require('../api/controllers/weathers.controller'),
+	Weather = require('../api/controllers/weathers.controller').weatherClass,
 	expect = chai.expect;
 
 

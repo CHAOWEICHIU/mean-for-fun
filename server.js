@@ -2,7 +2,7 @@ const express = require('express'),
 	  app 	= express(),
 	  path  = require('path'),
 	  cookieParser = require('cookie-parser'),
-	  routers = require('./routes'),
+	  routers = require('./api/routes'),
 	  PORT 		= process.env.PORT || 3000;
 app.use(cookieParser('helloo'))
 app.use(routers)
