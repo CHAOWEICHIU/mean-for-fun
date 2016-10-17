@@ -8,12 +8,8 @@ function WeatherCtrl($http, $scope){
 	$scope.$watch('vm.zipcode', (newvalue, oldvalue)=>{
 		if(checkZipCode(newvalue)){
 			$http.get(`${url}?zip=${newvalue}`)
-				.then((res)=>{
-				vm.start = 'start to make request'
-				vm.name = res.data.name
-			})
+				.then((res)=>{httpReq()})
 		} else {
-			vm.start = ''
 			vm.name = '??'
 		}
 		
@@ -25,23 +21,25 @@ function WeatherCtrl($http, $scope){
 		return false
 	}
 	vm.res = 'not yet'
-
-	$http({
-		method: 'GET',
-		url: `${url}?zip=48340`,
-		headers:{
-			'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type, X-Requested-With'
-		}
-	})
-	.success(function(d){ 
-		vm.res = 'Yes'
-	})
-    .error(function(d){ 
-    	vm.res = 'Nope'
-    	console.log('Nope'); 
-    });
+	var httpReq = function(zipcode){
+		$http({
+			method: 'GET',
+			url: `${url}?zip=${zipcode}`,
+			headers:{
+				'Access-Control-Allow-Origin': '*',
+	            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+	            'Access-Control-Allow-Headers': 'Content-Type, X-Requested-With'
+			}
+		})
+		.success(function(d){ 
+			vm.name = d.name
+			vm.res = 'Yes'
+		})
+	    .error(function(d){ 
+	    	vm.res = 'Nope'
+	    });	
+	}
+	
 
 	
 }

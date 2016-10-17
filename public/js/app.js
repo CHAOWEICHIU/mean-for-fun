@@ -5,10 +5,6 @@ angular.module('myApp', ['ngRoute'])
 
 
 function config($routeProvider, $httpProvider){
-	
-	$httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-	// console.log($httpProvider.defaults.headers)
-	
 	$routeProvider
 		.when('/', {
 			templateUrl: 'views/dashboard/index.html',
@@ -23,8 +19,3 @@ function config($routeProvider, $httpProvider){
 
 	
 }
-
-// function run($http){
-// 	console.log('hiii')
-// 	$http.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-// }
