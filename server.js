@@ -1,19 +1,26 @@
+require('./api/models/db.js')
+
 const express = require('express'),
 	  app 	= express(),
 	  path  = require('path'),
 	  cookieParser = require('cookie-parser'),
+	  bodyParser = require('body-parser'),
 	  routers = require('./api/routes'),
 	  PORT 		= process.env.PORT || 3000;
+
 app.use(cookieParser('helloo'))
+app.use(bodyParser.urlencoded({ extended: false }))
+
 app.use(routers)
 
 
 // logger
 app.use((req,res,next)=>{
 	console.log(req.method, req.url)
-	console.log("Cookies :  ", req.cookies);
 	next()
 })
+
+app.use('/api', routers)
 
 // serve static file
 app.use('/public', express.static(path.join(__dirname, 'public')))
