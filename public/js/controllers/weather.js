@@ -2,11 +2,12 @@ angular.module('myApp').controller('WeatherCtrl', WeatherCtrl)
 
 function WeatherCtrl($http, $scope){
 	var vm = this;
+	var url = 'https://ccw-dashboard.herokuapp.com/api/weather'
 	this.greeting = 'hello from weather ctrl'
 
 	$scope.$watch('vm.zipcode', (newvalue, oldvalue)=>{
 		if(checkZipCode(newvalue)){
-			$http.get(`http://localhost:3000/api/weather?zip=${newvalue}`)
+			$http.get(`${url}?zip=${newvalue}`)
 				.then((res)=>{
 				vm.start = 'start to make request'
 				vm.name = res.data.name
@@ -24,11 +25,23 @@ function WeatherCtrl($http, $scope){
 		return false
 	}
 	vm.res = 'not yet'
-	$http.get(`http://localhost:3000/api/weather?zip=48340`)
-		.then((res)=>{
-		vm.res = 'yes!'
-		
+
+	$http({
+		method: 'GET',
+		url: `${url}?zip=48340`,
+		headers:{
+			'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, X-Requested-With'
+		}
 	})
+	.success(function(d){ 
+		vm.res = 'Yes'
+	})
+    .error(function(d){ 
+    	vm.res = 'Nope'
+    	console.log('Nope'); 
+    });
 
 	
 }

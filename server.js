@@ -5,15 +5,25 @@ require('./api/models/db.js')
 const express = require('express'),
 	  app 	= express(),
 	  path  = require('path'),
+	  cors  = require('cors'),
 	  cookieParser = require('cookie-parser'),
 	  bodyParser = require('body-parser'),
 	  routers = require('./api/routes'),
 	  PORT 		= process.env.PORT || 3000;
 
-app.use(cookieParser('helloo'))
-app.use(bodyParser.urlencoded({ extended: false }))
 
+app.use(cookieParser('helloo'))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(routers)
+app.use(cors())
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
+
 
 
 // logger

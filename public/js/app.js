@@ -2,9 +2,13 @@
 
 angular.module('myApp', ['ngRoute'])
 	.config(config)
-	// .run(run)
 
-function config($routeProvider){
+
+function config($routeProvider, $httpProvider){
+	
+	$httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+	// console.log($httpProvider.defaults.headers)
+	
 	$routeProvider
 		.when('/', {
 			templateUrl: 'views/dashboard/index.html',
@@ -16,4 +20,11 @@ function config($routeProvider){
 			controller: 'WeatherCtrl',
 			controllerAs: 'vm',	
 		})
+
+	
 }
+
+// function run($http){
+// 	console.log('hiii')
+// 	$http.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+// }
