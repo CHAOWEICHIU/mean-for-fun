@@ -7,13 +7,8 @@ angular.module('myApp', ['ngRoute'])
 function config($routeProvider){
 	$routeProvider
 		.when('/', {
-			templateUrl: 'views/weather.html',
-			controller: 'WeathersCtrl',
+			templateUrl: 'views/dashboard/index.html',
+			controller: 'DashboardCtrl',
 			controllerAs: 'vm',
 		})
 }
-
-angular.module('myApp')
-	.controller('WeathersCtrl', ['$scope', function ($scope) {
-		console.log('WeathersCtrl')
-	}])
