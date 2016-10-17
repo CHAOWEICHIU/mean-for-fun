@@ -4,7 +4,7 @@ let   expect = require('chai').expect,
 	  url 	 = 'http://localhost:3000/api/notes';
 
 
-describe.only(`End Point: ${url}`, ()=>{
+describe(`End Point: ${url}`, ()=>{
 	let _id, notesResponse;
 	let form = {
 		title: 'new Title?',

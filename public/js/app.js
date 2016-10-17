@@ -11,4 +11,9 @@ function config($routeProvider){
 			controller: 'DashboardCtrl',
 			controllerAs: 'vm',
 		})
+		.when('/weather', {
+			templateUrl: 'views/dashboard/weather.html',
+			controller: 'WeatherCtrl',
+			controllerAs: 'vm',	
+		})
 }
