@@ -15,7 +15,7 @@ const express = require('express'),
 app.use(cookieParser('helloo'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(routers)
-// app.use(cors())
+app.use(cors())
 
 // app.use(function(req, res, next) {
 //     res.header("Access-Control-Allow-Origin", "*");
