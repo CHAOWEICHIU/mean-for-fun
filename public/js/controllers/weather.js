@@ -7,8 +7,7 @@ function WeatherCtrl($http, $scope){
 
 	$scope.$watch('vm.zipcode', (newvalue, oldvalue)=>{
 		if(checkZipCode(newvalue)){
-			$http.get(`${url}?zip=${newvalue}`)
-				.then((res)=>{httpReq()})
+			httpReq(newvalue)
 		} else {
 			vm.name = '??'
 		}
@@ -21,17 +20,15 @@ function WeatherCtrl($http, $scope){
 		return false
 	}
 	vm.res = 'not yet'
+	
 	var httpReq = function(zipcode){
+		console.log(zipcode)
 		$http({
 			method: 'GET',
-			url: `${url}?zip=${zipcode}`,
-			headers:{
-				'Access-Control-Allow-Origin': '*',
-	            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-	            'Access-Control-Allow-Headers': 'Content-Type, X-Requested-With'
-			}
+			url: `${url}?zip=${zipcode}`
 		})
 		.success(function(d){ 
+			console.log()
 			vm.name = d.name
 			vm.res = 'Yes'
 		})
