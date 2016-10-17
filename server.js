@@ -25,7 +25,7 @@ app.use(routers)
 app.use('/api', routers)
 
 // serve static file
-app.use('/public', express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public')))
 app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')))
 
 
