@@ -23,6 +23,12 @@ function WeatherCtrl($http, $scope){
 		if(output.length === 5)return true
 		return false
 	}
+	vm.res = 'not yet'
+	$http.get(`http://localhost:3000/api/weather?zip=48340`)
+		.then((res)=>{
+		vm.res = 'yes!'
+		
+	})
 
 	
 }
