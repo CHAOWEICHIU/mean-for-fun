@@ -22,13 +22,13 @@ function handleResponseError(err, res){
 		case'CastError':
 			errorMessage.error = 'CastError';
 			errorMessage.statusCode = 404;
-			errorMessage.message =  `${err.value} is not found`;
+			errorMessage.message =  `${err.value} Not Found`;
 			break;
 		
 		case'DeleteNotFound':
 			errorMessage.error = 'DeleteNotFound';
 			errorMessage.statusCode = 404;
-			errorMessage.message =  `${err.value} is not found`;
+			errorMessage.message =  `${err.value} Not Found`;
 			break;
 
 		default: 
@@ -111,6 +111,7 @@ module.exports.notesRemoveOne = (req, res) => {
 module.exports.notesUpdateOne = (req, res) => {
 	Note.findById(req.params.id)
 		.exec((err, note)=>{
+			console.log(req.body)
 			if(err){handleResponse(err, res)}
 			note.title = req.body.title
 			note.content = req.body.content

@@ -4,7 +4,7 @@ let   expect = require('chai').expect,
 	  url 	 = 'http://localhost:3000/api/notes';
 
 
-describe.only('ctrlNotes', ()=>{
+describe.only(`End Point: ${url}`, ()=>{
 	let _id, notesResponse;
 	let form = {
 		title: 'new Title?',
@@ -21,14 +21,12 @@ describe.only('ctrlNotes', ()=>{
 	})
 
 
-
-
-	it('.nodesGetAll() should return all notes', ()=>{
+	it('Method: GET should return 200', ()=>{
 			expect(notesResponse.statusCode).to.equal(200)
 			expect(typeof notesResponseBody.length).to.equal('number')
 	})
 
-	it('.nodesAddOne() should have +1 after successfully added', (done)=>{
+	it('Method: POST should return 201 after successfully created', (done)=>{
 		request.post({
 			url: url,
 			form: {
@@ -39,7 +37,6 @@ describe.only('ctrlNotes', ()=>{
 		}, (err, res)=>{
 			_id = JSON.parse(res.body)._id
 			expect(res.statusCode).to.equal(201)
-
 			request.get(url, (err, res)=>{
 				expect(notesResponseBody.length + 1).to.equal(JSON.parse(res.body).length)
 				done()
@@ -47,41 +44,50 @@ describe.only('ctrlNotes', ()=>{
 		})
 	})
 
-	it('.nodesAddOne() should return 400 for bad request', (done)=>{
+	it('Method: POST should return 400 for insufficient info with proper error message', (done)=>{
 		request.post({ url:url, form:{ title: 'only'}}, (err, res, body)=>{
 			expect(res.statusCode).to.equal(400)
+			expect(JSON.parse(body).error).to.equal('ValidationError')
 			done()
 		})
 	})
 
-
-	it('.noteGetOne() should return 200 after successfully got one', (done)=>{
-		request.get(`${url}/${_id}`, (err, res)=>{
+	it('Method: GET should return 200 for correct _id', (done)=>{
+		request.get(`${url}/${_id}`, (err, res, body)=>{
 			expect(res.statusCode).to.equal(200)
+			expect(JSON.parse(body)._id).to.equal(_id)
 			done()
 		})
 	})
 
-	it('.noteGetOne() should return 404 with proer error message if id was not found', (done)=>{
-		request.get(`${url}/1111`, (err, res)=>{
+	it('Method: GET should return 404 for incorrect _id with proper error message ', (done)=>{
+		let incorrectId = '13f1dasfas'
+		request.get(`${url}/${incorrectId}`, (err, res, body)=>{
 			expect(res.statusCode).to.equal(404)
 			expect(JSON.parse(res.body).error).to.equal('CastError')
+			expect(JSON.parse(res.body).message).to.equal(`${incorrectId} Not Found`)
 			done()
 		})
 	})
 	
-	it('.update() should return 200 after successfully removed', (done)=>{
-		request.put({ url:`${url}/${_id}`, form:{ title: 'change', content:'c', created_user:'cc'}}, (err, res)=>{
+	it('Method: DELETE should return 200 after successfully deleted', (done)=>{
+		request.delete({ url:`${url}/${_id}`}, (err, res)=>{
 			expect(res.statusCode).to.equal(200)
+			expect(JSON.parse(res.body).message).to.equal('removed successfully')
 			done()
 		})
 	})
 
-	it('.update() should return 404 with proer error message if id was not found', (done)=>{
-		request.put({ url:`${url}/2222`, form:{ title: 'change', content:'c', created_user:'cc'}}, (err, res)=>{
+	it('Method: DELETE should return 404 for incorrect _id with proper error message', (done)=>{
+		let incorrectId = 'sadml1e213em'
+		request.delete({ url:`${url}/${incorrectId}`}, (err, res)=>{
 			expect(res.statusCode).to.equal(404)
+			expect(JSON.parse(res.body).error).to.equal('DeleteNotFound')
+			expect(JSON.parse(res.body).message).to.equal(`${incorrectId} Not Found`)
 			done()
 		})
 	})
+
+
 
 })
