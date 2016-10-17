@@ -8,9 +8,11 @@ function WeatherCtrl($http, $scope){
 		if(checkZipCode(newvalue)){
 			$http.get(`http://localhost:3000/api/weather?zip=${newvalue}`)
 				.then((res)=>{
+				vm.start = 'start to make request'
 				vm.name = res.data.name
 			})
 		} else {
+			vm.start = ''
 			vm.name = '??'
 		}
 		
