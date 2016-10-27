@@ -15,15 +15,15 @@ passport.serializeUser((user, done)=>{
 })
 
 passport.deserializeUser((clientObject, done)=>{
-    console.log('5-deserializeUser')
-    console.log('de: ',clientObject.scope)
     User.findById(clientObject.id, (err, user)=>{
         done(err, user);
     })
 })
 
 
-var gatherNewUserData = function(callback){
+
+
+var gatherNewUserData = function(profile, token,callback){
     var newUser          = new User();
     // set all of the relevant information
     newUser.id              = profile.id;
@@ -49,7 +49,7 @@ passport.use(new GoogleStrategy({
         if (err) return done(err);
         if (user) return done(null, user);
 
-        gatherNewUserData((newUser)=>{
+        gatherNewUserData(profile, token,(newUser)=>{
             newUser.save((err)=>{
                 if(err) throw err;
                 return done(null, newUser)
