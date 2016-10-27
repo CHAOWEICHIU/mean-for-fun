@@ -5,8 +5,8 @@ This is an dashboard app that you can put all of your fav app summary in one das
 
 
 ## Test Command 
-- require local database
-npm test
+- require local database for 
+- Command -> npm test
 
 
 ## Widget
