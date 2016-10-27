@@ -1,9 +1,17 @@
 angular.module('myApp').controller('WeatherCtrl', WeatherCtrl)
 
+WeatherCtrl.$inject = ['$http', '$scope'];
+
 function WeatherCtrl($http, $scope){
+	console.log('weather ctrl')
 	var vm = this;
 	var url = 'https://ccw-dashboard.herokuapp.com/api/weather'
-	this.greeting = 'hello from weather ctrl'
+	
+	
+
+
+
+
 
 	$scope.$watch('vm.zipcode', (newvalue, oldvalue)=>{
 		if(checkZipCode(newvalue)){
@@ -11,7 +19,6 @@ function WeatherCtrl($http, $scope){
 		} else {
 			vm.name = '??'
 		}
-		
 		
 	})
 	function checkZipCode(input){
@@ -36,6 +43,8 @@ function WeatherCtrl($http, $scope){
 	    	vm.res = 'Nope'
 	    });	
 	}
+	
+
 	
 
 	

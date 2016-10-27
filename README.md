@@ -6,7 +6,7 @@ This is an dashboard app that you can put all of your fav app summary in one das
 
 
 ## Widget
-- Weather Report - API done
+- Weather Report - API [ok]
 - Financial Report
 - Notes
 - Todo List

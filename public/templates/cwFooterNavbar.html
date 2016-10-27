@@ -17,46 +17,13 @@ span.glyphicon-lg {
     padding-left:0;
 }
 </style>
-<div id="footerr" class="container">
-    <!-- Show for user logged in-->
-    <div class="row no-gutter" ng-if="vm.isLoggedIn()">      
-      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-        <button class="btn btn-primary btn-lg btn-block sharp"
-          ng-class="vm.isActiveTab('/')"
-          ng-click="vm.linkTo('/')">
-        <span class="glyphicon glyphicon-home glyphicon-lg"></span></button>
-      </div>
-
-      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-        <button class="btn btn-primary btn-lg btn-block sharp" 
-          ng-class="vm.isActiveTab('/foods/add')"
-          ng-click="vm.linkTo('/foods/add')">
-          <span class="glyphicon glyphicon-plus glyphicon-lg"></span></button>
-      </div>
-
-      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-        <button class="btn btn-primary btn-lg btn-block sharp"
-          ng-class="vm.isActiveTab('/collection')"
-          ng-click="vm.linkTo('/collection')">
-        <span class="glyphicon glyphicon-heart glyphicon-lg"></span></button>
-      </div>
-
-      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-          <button class="btn btn-primary btn-lg btn-block sharp"
-          ng-class="vm.isActiveTab('/profile')"
-          ng-click="vm.linkTo('/profile')"
-          ng-if="vm.isLoggedIn()">
-          <span class="glyphicon glyphicon-user glyphicon-lg"></span></button>
-
-      </div>
-    </div>
-
+<div id="footerr" class="container" ng-controller="NavCtrl as vm">
 
     <!-- Show for user NOT logged in-->
-    <div class="row no-gutter" ng-if="!vm.isLoggedIn()">      
+    <div class="row no-gutter""> 
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <button class="btn btn-primary btn-lg btn-block sharp"
-          ng-class="vm.isActiveTab('/')"
+          ng-class="vm.activeTab==='/' ? 'btn-danger' : ''"
           ng-click="vm.linkTo('/')">
         <span class="glyphicon glyphicon-home glyphicon-lg"></span></button>
       </div>
@@ -64,15 +31,14 @@ span.glyphicon-lg {
 
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
             <button class="btn btn-primary btn-lg btn-block sharp"
-          ng-class="vm.isActiveTab('/login')"
-          ng-click="vm.linkTo('/login')"
-          ng-if="!vm.isLoggedIn()">
+          ng-class="vm.activeTab==='/login' ? 'btn-danger' : ''"
+          ng-click="vm.linkTo('/login')">
           <span class="glyphicon glyphicon-user glyphicon-lg"></span></button>
       </div>
     </div>
     
+</div>
+    
     
       
     
-    
-</div>

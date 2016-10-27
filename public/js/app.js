@@ -5,16 +5,22 @@ angular.module('myApp', ['ngRoute'])
 
 
 function config($routeProvider, $httpProvider){
+	
 	$routeProvider
 		.when('/', {
 			templateUrl: 'views/dashboard/index.html',
 			controller: 'DashboardCtrl',
-			controllerAs: 'vm',
+			controllerAs: 'vm'
 		})
 		.when('/weather', {
 			templateUrl: 'views/dashboard/weather.html',
 			controller: 'WeatherCtrl',
-			controllerAs: 'vm',	
+			controllerAs: 'vm'
+		})
+		.when('/login', {
+			templateUrl: 'views/dashboard/login.html',
+			controller: 'LoginCtrl',
+			controllerAs: 'vm'
 		})
 
 	

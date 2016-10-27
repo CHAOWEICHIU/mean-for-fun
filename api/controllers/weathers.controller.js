@@ -16,11 +16,11 @@ function Weather(){
 
 module.exports.weatherClass = Weather;
 
-module.exports.getWeather = (req, res)=>{
-	let weather = new Weather();
-	let zip = req.query.zip || 0
-	weather.getWeather(zip, (info)=>{
-		if(info.statusCode !== 200)return res.json('Nope!')
-		res.json(info.data)
-	})
-}
+// module.exports.getWeather = (req, res)=>{
+// 	let weather = new Weather();
+// 	let zip = req.query.zip || 0
+// 	weather.getWeather(zip, (info)=>{
+// 		if(info.statusCode !== 200)return res.json('Nope!')
+// 		res.json(info.data)
+// 	})
+// }

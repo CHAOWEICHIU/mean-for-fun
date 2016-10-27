@@ -1,10 +1,9 @@
 'use strict'
 
-var mongoose = require('mongoose');
-// Local 
-// var dbUrl = 'mongodb://localhost/fav-food-recipe'
-// mongolab
-var dbUrl = 'mongodb://cw:cw@ds029456.mlab.com:29456/fav-food-recipe'
+const mongoose = require('mongoose')
+	, configDB = require('../config/database')
+
+var dbUrl = configDB.url
 
 
 
