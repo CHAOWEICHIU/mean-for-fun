@@ -4,54 +4,50 @@ const expect = require('chai').expect
 	, localhost = `http://localhost:3000`;
 
 describe.only(`${localhost}/api/notes`, ()=>{
-	let createdNote;
+	let oneNote;
 
 
-	it('GET should statusCode 200 ', (done)=>{
+	it('GET All should statusCode 200 ', (done)=>{
 		request(`${localhost}/api/notes`, (err, res)=>{
-			expect(res.statusCode).to.equal(200)	
+			oneNote = JSON.parse(res.body)[0]
+			expect(res.statusCode).to.equal(200)
 			done()
 		})
 	})
 
-	it('POST should get statusCode 201', (done)=>{
-		let newNote = {
-			title: 'zzzzwo!',
-			content: 'Yo!!',
-			created_user: 'ccw'
-		}
+	it('GET One should return statusCode 200 ', (done)=>{
+		request(`${localhost}/api/notes/${oneNote._id}`, (err, res)=>{
+			expect(res.statusCode).to.equal(200)
+			done()
+		})	
+	})
+
+	it('Without Auth, POST should get statusCode 401', ()=>{
 		request.post({
 			url:`${localhost}/api/notes`, 
-			form: newNote
+			form: {title:'ho'}
 		}, (err,res,body)=>{ 
-			createdNote = JSON.parse(body)
-			expect(res.statusCode).to.equal(201)
-			done()
+			expect(res.statusCode).to.equal(401)
 		})
 	})
 
-	it('PUT should get statusCode 200', (done)=>{
-		let updateNote = {
-			title: 'zzzzwo!',
-			content: 'Yo!!',
-			created_user: 'ccwcczzz'
-		}
+	it('Without Auth, PUT should get statusCode 401', ()=>{
+		
 		request.put({
-			url:`${localhost}/api/notes/${createdNote._id}`,
-			form: updateNote
+			url:`${localhost}/api/notes/23333`,
+			form: {title: 'good'}
 		}, (err,res,body)=>{ 
-			expect(res.statusCode).to.equal(200)
-			done()
+			expect(res.statusCode).to.equal(401)
+			
 		})
 	})
 
 
-	it('DELETE should get statusCode 200', (done)=>{
+	it('Without Auth,, DELETE should get statusCode 401', ()=>{
 		request.delete({
-			url:`${localhost}/api/notes/${createdNote._id}`
+			url:`${localhost}/api/notes/2222}`
 		}, (err,res,body)=>{ 
-			expect(res.statusCode).to.equal(200)
-			done()
+			expect(res.statusCode).to.equal(401)
 		})
 		
 	})

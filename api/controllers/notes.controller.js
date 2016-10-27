@@ -3,7 +3,8 @@
 var   mongoose = require('mongoose')
     , Note = mongoose.model('Note')
     , handleResponseError = require('./response.controller').handleResponseError
-	, handleResponse = require('./response.controller').handleResponse;
+	, handleResponse = require('./response.controller').handleResponse
+
 
 
 

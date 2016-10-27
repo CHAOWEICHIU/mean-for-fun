@@ -1,10 +1,11 @@
 'use strict'
 
-const express = require('express'),
-	  router  = express.Router();
+const express = require('express')
+	, router  = express.Router();
 
-const ctrlWeathers 	= require('../controllers/weathers.controller'),
-	  ctrlNotes 	= require('../controllers/notes.controller');
+const ctrlWeathers 	= require('../controllers/weathers.controller')
+	, ctrlNotes 	= require('../controllers/notes.controller')
+	, checkCtrl = require('../controllers/check.controller')
 
 router
 	.route('/weather')
@@ -12,14 +13,14 @@ router
 
 router
 	.route('/notes')
-	.post(ctrlNotes.notesAddOne)
+	.post(checkCtrl.login, ctrlNotes.notesAddOne)
 	.get(ctrlNotes.notesGetAll)
 
 router
 	.route('/notes/:id')
 	.get(ctrlNotes.notesGetOne)
-	.delete(ctrlNotes.notesRemoveOne)
-	.put(ctrlNotes.notesUpdateOne)
+	.delete(checkCtrl.login ,ctrlNotes.notesRemoveOne)
+	.put(checkCtrl.login, ctrlNotes.notesUpdateOne)
 
 
 

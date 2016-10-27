@@ -4,7 +4,7 @@
   "description": "TDD app",
   "main": "server.js",
   "scripts": {
-    "test": "mocha --recursive --watch",
+    "test": "mocha --recursive",
     "start": "node server.js"
   },
   "author": "chao wei chiu",
@@ -26,6 +26,7 @@
     "chai": "^3.5.0",
     "co-mocha": "^1.1.3",
     "mocha": "^3.1.2",
-    "nock": "^8.1.0"
+    "nock": "^8.1.0",
+    "superagent": "^2.3.0"
   }
 }

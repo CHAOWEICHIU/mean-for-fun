@@ -6,6 +6,7 @@ const passport = require('passport')
 
 
 passport.serializeUser((user, done)=>{
+    console.log('serializeUser')
     let put = {
         id: user._id,
         scope: ['weather', 'cool']
@@ -15,6 +16,7 @@ passport.serializeUser((user, done)=>{
 })
 
 passport.deserializeUser((clientObject, done)=>{
+    console.log('deserializeUser')
     User.findById(clientObject.id, (err, user)=>{
         done(err, user);
     })
