@@ -23,7 +23,7 @@ passport.deserializeUser((clientObject, done)=>{
 
 
 
-var gatherNewUserData = function(profile, token,callback){
+var gatherNewUserData = function(profile, token ,callback){
     var newUser          = new User();
     // set all of the relevant information
     newUser.id              = profile.id;
