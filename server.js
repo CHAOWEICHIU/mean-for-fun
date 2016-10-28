@@ -21,11 +21,10 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 
 app.set('views', __dirname + '/public')
-// app.set('view engine', 'html');
 
 
 app.use(session({ 
-	secret: 'hood',
+	secret: 'good',
 	resave: true,
 	saveUninitialized: true 
 })); // session secret

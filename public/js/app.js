@@ -2,10 +2,11 @@
 
 angular.module('myApp', ['ngRoute'])
 	.config(config)
+	.run(run)
+
 
 
 function config($routeProvider, $httpProvider){
-	
 	$routeProvider
 		.when('/', {
 			templateUrl: 'views/dashboard/index.html',
@@ -24,4 +25,24 @@ function config($routeProvider, $httpProvider){
 		})
 
 	
+}
+
+function run($http, $rootScope, AuthFactory){
+	
+
+
+
+	$rootScope.$on('$routeChangeStart', (event, nextRoute, previousRoute)=>{
+		
+		$http.get('http://localhost:3000/auth/user')
+			.then((res)=>{
+				AuthFactory.isLoggedIn = true
+			})
+			.catch((err)=>{
+				AuthFactory.isLoggedIn = false
+			})
+
+
+
+	})
 }
